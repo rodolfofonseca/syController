@@ -1,5 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
+import Swal from 'sweetalert2'
+
+
 import {App} from './app'
 import './index.css'
 

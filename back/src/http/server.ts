@@ -6,9 +6,7 @@ import {pesquisarUsuario} from './rotas/pesquisar-usuario';
 
 const APP = fastify();
 
-APP.register(cors, { 
-    // put your options here
-})
+APP.register(cors, { })
 
 APP.register(cadastroUsuario);
 APP.register(pesquisarUsuario);
