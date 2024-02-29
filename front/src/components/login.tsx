@@ -1,5 +1,5 @@
 import Swal from 'sweetalert2'
-export function login() {
+export function softwareLogin() {
 
     function alerta(){
         Swal.fire({
