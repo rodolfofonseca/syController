@@ -8,14 +8,17 @@ export async function user_login(app: FastifyInstance){
 
         let {email, password} = body_user_login.parse(request.body);
 
-        let return_prisma = await prisma.user.findUnique(
-            {
-                where:{
-                    email:'rodolfo',
-                    password:'123'
-                }
-            }
-        );
+        if(email == '' || password == ''){
+            return reply.status(205).send('NÃO FOI REALIZADO PESQUISA POIS DOS DADOS ESTÃO INCORRETOS');
+        }
+        
+        let return_prisma = await prisma.user.findUnique({where:{email:email, password:password}});
+        
+        if(return_prisma == null){
+            return reply.status(205).send('NÃO FOI REALIZADO PESQUISA POIS DOS DADOS ESTÃO INCORRETOS');
+        }else{
+            return reply.send(return_prisma);
+        }
 
         return reply.status(201).send(return_prisma);
     });
