@@ -1,33 +1,114 @@
+// "use client";
+// import { ArticleBody } from "@/components/ArticleBody";
+// import { Footer } from "@/components/Footer";
+// import { NavBar } from "@/components/NavBar";
+// import { Search } from "@/components/Search";
+// import { useRouter } from 'next/navigation';
 "use client";
-import { ArticleBody } from "@/components/ArticleBody";
-import { Footer } from "@/components/Footer";
-import { NavBar } from "@/components/NavBar";
-import {Search} from "@/components/Search";
+import Swal from 'sweetalert2'
+import { useRouter } from 'next/navigation';
+import {ChangeEvent, useState} from 'react';
+import { NavBar } from '@/components/NavBar';
 
 export default function Home() {
-  let name_user = localStorage.getItem('name_user')?.toString();
-  let email_user = localStorage.getItem('email_user')?.toString();
-  
-  if(name_user == null){
-    name_user = '';
-  }
+  // try{
+  //   if(sessionStorage.getItem('name_user') != null){
+  //   }
+  //   }catch(error){
+  //   }
 
-  if(email_user == null){
-    email_user = '';
-  }
+  // let artists_obj = [[]];
 
-  console.log(name_user);
+  // async function search_artists(){
+  //   let body = JSON.stringify({});
+  //   let url = 'http://localhost:3333/search_artists/';
+  //   let return_response = 0;
 
+  //   let response = await fetch(url, {method:"GET", headers:{"Content-Type":"application/json"}});
 
+  //   let res_json = response.json();
+
+  //   await res_json.then((promise) => {
+  //     artists_obj = [];
+  //     artists_obj.push(promise);
+  //     console.log(artists_obj);
+
+  //     // console.log(promise[0]);
+  //     // // promise.map((valor) =>{
+  //     // //   console.log(valor);
+  //     // // });
+
+  //   });
+
+  //   console.log(artists_obj);
+  // }
+
+  // search_artists();
+
+  let router = useRouter();
+    let [email, setEmail] = useState('');
+    let [password, setPassword] = useState('');
+
+    function userCad() {
+        router.push("/login/user_cad")
+    }
+
+    function handleEmailChanged(event: ChangeEvent<HTMLInputElement>){
+        setEmail(event.target.value);
+    }
+
+    function handlePasswordChange(event: ChangeEvent<HTMLInputElement>){
+        setPassword(event.target.value);
+    }
+
+    async function login() {
+        let body = JSON.stringify({email, password});
+        let url = 'http://localhost:3333/user_login';
+        let return_response = 0;
+
+        let response = await fetch(url, {method:"POST", headers:{"Content-Type":"application/json"}, body});
+
+        return_response = response.status;
+
+        if(return_response == 200){
+            let res_json = response.json();
+            
+            res_json.then((promise) => {
+                sessionStorage.setItem('id_user', promise['id_user']);
+                sessionStorage.setItem('name_user', promise['name_user']);
+                sessionStorage.setItem('email', promise['email']);
+            });
+
+            Swal.fire({title: "Sucesso", text: "Login realizado com sucesso!", icon: "success"});
+            
+            setTimeout(function(){router.push("/system");}, 3000);
+        }else if (return_response == 205){
+            Swal.fire({title: "Falha", text: "Falha no processo de login uuário ou senha incorretos!", icon: "error"});
+        }else{
+            throw new Error('Erro desconhecido');
+        }
+    }
 
   return (
-    <div className="dark:bg-gray-700">
-      <NavBar />
-      <Search />
-      <ArticleBody />
-      <ArticleBody />
-      <ArticleBody />
-      <Footer />
+    // <div className="dark:bg-gray-700">
+    //   <NavBar />
+    //   <Search />
+    //   <Footer />
+    // </div>
+
+    <div>
+      <form className="max-w-sm mx-auto mt-[10%]">
+        <div className="mb-5">
+          <label className="block mb-2 text-sm font-medium dark:text-white">Email</label>
+          <input type="email" id="email" className="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="email@email.com" required onChange={handleEmailChanged} value={email} />
+        </div>
+        <div className="mb-5">
+          <label className="block mb-2 text-sm font-medium dark:text-white">Senha</label>
+          <input type="password" id="password" className="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500" required onChange={handlePasswordChange} value={password} />
+        </div>
+        <button type="button" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" onClick={login}>Enviar</button>
+        <button type="button" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 ml-[125px]" onClick={userCad}>Não sou cadastrado</button>
+      </form>
     </div>
-  );
+  )
 }

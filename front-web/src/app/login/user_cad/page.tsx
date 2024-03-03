@@ -30,10 +30,14 @@ export default function UserCad() {
         return_response = response.status;
         
         if(return_response == 201){
+            let json_response = response.json();
+            json_response.then((promise) => {
+                sessionStorage.setItem("name_user", promise['name_user']);
+                sessionStorage.setItem("email_user", promise['email']);
+                sessionStorage.setItem("id_user", promise['id_user']);
+            });
+
             Swal.fire({title: "Sucesso", text: "Sucesso no processo de cadastro!", icon: "success"});
-            
-            localStorage.setItem("name_user", name_user);
-            localStorage.setItem("email_user", email);
 
             setTimeout(function(){router.push("/");}, 3000);
         }else if(return_response == 205){
