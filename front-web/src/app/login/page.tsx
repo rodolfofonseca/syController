@@ -39,6 +39,7 @@ export default function Login() {
                 sessionStorage.setItem('id_user', promise['id_user']);
                 sessionStorage.setItem('name_user', promise['name_user']);
                 sessionStorage.setItem('email', promise['email']);
+                sessionStorage.setItem('id_artist', "");
             });
 
             Swal.fire({title: "Sucesso", text: "Login realizado com sucesso!", icon: "success"});

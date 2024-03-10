@@ -8,42 +8,8 @@
 import Swal from 'sweetalert2'
 import { useRouter } from 'next/navigation';
 import {ChangeEvent, useState} from 'react';
-import { NavBar } from '@/components/NavBar';
 
 export default function Home() {
-  // try{
-  //   if(sessionStorage.getItem('name_user') != null){
-  //   }
-  //   }catch(error){
-  //   }
-
-  // let artists_obj = [[]];
-
-  // async function search_artists(){
-  //   let body = JSON.stringify({});
-  //   let url = 'http://localhost:3333/search_artists/';
-  //   let return_response = 0;
-
-  //   let response = await fetch(url, {method:"GET", headers:{"Content-Type":"application/json"}});
-
-  //   let res_json = response.json();
-
-  //   await res_json.then((promise) => {
-  //     artists_obj = [];
-  //     artists_obj.push(promise);
-  //     console.log(artists_obj);
-
-  //     // console.log(promise[0]);
-  //     // // promise.map((valor) =>{
-  //     // //   console.log(valor);
-  //     // // });
-
-  //   });
-
-  //   console.log(artists_obj);
-  // }
-
-  // search_artists();
 
   let router = useRouter();
     let [email, setEmail] = useState('');
@@ -70,7 +36,7 @@ export default function Home() {
 
         return_response = response.status;
 
-        if(return_response == 200){
+        if(return_response == 200 || return_response == 201){
             let res_json = response.json();
             
             res_json.then((promise) => {
@@ -90,12 +56,6 @@ export default function Home() {
     }
 
   return (
-    // <div className="dark:bg-gray-700">
-    //   <NavBar />
-    //   <Search />
-    //   <Footer />
-    // </div>
-
     <div>
       <form className="max-w-sm mx-auto mt-[10%]">
         <div className="mb-5">

@@ -8,7 +8,7 @@ export function softwareLogin() {
     function alerta(){
         Swal.fire({
             title: 'Error!',
-            text: 'Do you want to continue',
+            text: 'Erro na operação!',
             icon: 'error',
             confirmButtonText: 'Cool'
           })

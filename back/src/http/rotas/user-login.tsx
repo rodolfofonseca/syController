@@ -17,9 +17,7 @@ export async function user_login(app: FastifyInstance){
         if(return_prisma == null){
             return reply.status(205).send('NÃO FOI REALIZADO PESQUISA POIS DOS DADOS ESTÃO INCORRETOS');
         }else{
-            return reply.send(return_prisma);
+            return reply.status(201).send(return_prisma);
         }
-
-        return reply.status(201).send(return_prisma);
     });
 }
