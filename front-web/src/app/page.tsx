@@ -1,9 +1,3 @@
-// "use client";
-// import { ArticleBody } from "@/components/ArticleBody";
-// import { Footer } from "@/components/Footer";
-// import { NavBar } from "@/components/NavBar";
-// import { Search } from "@/components/Search";
-// import { useRouter } from 'next/navigation';
 "use client";
 import Swal from 'sweetalert2'
 import { useRouter } from 'next/navigation';
@@ -15,8 +9,8 @@ export default function Home() {
     let [email, setEmail] = useState('');
     let [password, setPassword] = useState('');
 
-    function userCad() {
-        router.push("/login/user_cad")
+    function companiesRegistrarion() {
+        router.push("/companies/companies_registration");
     }
 
     function handleEmailChanged(event: ChangeEvent<HTMLInputElement>){
@@ -67,7 +61,7 @@ export default function Home() {
           <input type="password" id="password" className="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500" required onChange={handlePasswordChange} value={password} />
         </div>
         <button type="button" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" onClick={login}>Enviar</button>
-        <button type="button" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 ml-[125px]" onClick={userCad}>Não sou cadastrado</button>
+        <button type="button" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 ml-[125px]" onClick={companiesRegistrarion}>Não sou cadastrado</button>
       </form>
     </div>
   )
