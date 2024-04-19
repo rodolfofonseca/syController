@@ -53,8 +53,8 @@ export default function Home() {
     <div>
       <form className="max-w-sm mx-auto mt-[10%]">
         <div className="mb-5">
-          <label className="block mb-2 text-sm font-medium dark:text-white">Email</label>
-          <input type="email" id="email" className="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="email@email.com" required onChange={handleEmailChanged} value={email} />
+          <label className="block mb-2 text-sm font-medium dark:text-white">Login</label>
+          <input type="text" id="login" className="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="email@email.com" required onChange={handleEmailChanged} value={email} />
         </div>
         <div className="mb-5">
           <label className="block mb-2 text-sm font-medium dark:text-white">Senha</label>
